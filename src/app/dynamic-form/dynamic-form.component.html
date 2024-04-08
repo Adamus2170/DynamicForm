@@ -1,0 +1,20 @@
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+    <div *ngFor="let el of formService.getFormStructure()">
+        <div *ngIf="el.type === 'select'">
+             <select [formControlName]="el.name">
+               <option *ngFor="let option of el.options" [value]="option">{{option}}</option>
+             </select>
+           </div>
+          <div *ngIf="el.type !== 'select'">
+            <input [type]="el.type" [formControlName]="el.name">
+          </div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+<!-- <form [formGroup]="dynamicForm" (ngSubmit)="ons">
+    <div *ngFor="let control of formService.getFormStructure()">
+      <label>{{control.label}}</label>
+      <input [type]="control.type" [formControlName]="control.name">
+    </div>
+    <button type="submit">Submit</button>
+</form> -->
